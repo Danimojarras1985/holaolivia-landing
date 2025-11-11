@@ -1,3 +1,5 @@
+"use client";
+
 import { Camera, Heart, Star, Settings, User, Mail, Phone, MapPin } from "lucide-react";
 import { Icon } from "./Icon";
 
