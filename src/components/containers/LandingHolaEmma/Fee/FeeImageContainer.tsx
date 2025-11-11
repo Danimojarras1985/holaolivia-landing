@@ -1,0 +1,25 @@
+"use client";
+
+import Image from "next/image";
+
+export function FeeImageContainer() {
+  return (
+    <div
+      className="
+        flex flex-col justify-center items-center
+        h-process-image-mobile
+        md:flex-1 md:h-process-image-desktop
+      "
+    >
+      <Image
+        src="/landing/fee/fee-commissions-mockup.webp"
+        alt="Ejemplo de la pantalla de comisiones que puede ver el broker"
+        width={1011}
+        height={768}
+        priority
+        className="w-auto h-full object-contain rounded-[var(--radius-lg)]"
+      />
+    </div>
+  );
+}
+
