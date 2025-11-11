@@ -1,15 +1,16 @@
-import { 
-  ArrowLeft, 
-  ArrowRight, 
-  BellRing, 
-  ListTodo, 
-  MessageCircle, 
-  FileText, 
-  Smartphone,
-  ChevronDown
+"use client";
+
+import type { LucideIcon, LucideProps } from "lucide-react";
+
+import {
+  ArrowLeft, ArrowRight, BellRing, ListTodo, MessageCircle, FileText,
+  Smartphone, ChevronDown,
+  // íconos usados por IconExample
+  Camera, Heart, Star, Settings, User, Mail, Phone, MapPin
 } from "lucide-react";
 import { cn } from "../../lib/utils";
 
+// Registro nominal para permitir strings
 const ICON_MAP = {
   "arrow-left": ArrowLeft,
   "arrow-right": ArrowRight,
@@ -19,28 +20,48 @@ const ICON_MAP = {
   "file-text": FileText,
   "smartphone": Smartphone,
   "chevron-down": ChevronDown,
-};
+  // usados en IconExample
+  "camera": Camera,
+  "heart": Heart,
+  "star": Star,
+  "settings": Settings,
+  "user": User,
+  "mail": Mail,
+  "phone": Phone,
+  "map-pin": MapPin,
+} as const;
+
+export type IconName = keyof typeof ICON_MAP;
 
 type IconProps = {
-  icon: keyof typeof ICON_MAP;
+  /** Nombre del ícono registrado o un componente Lucide directo */
+  icon: IconName | string | LucideIcon;
   size?: "sm" | "md" | "lg";
   className?: string;
-};
+} & Omit<LucideProps, "className" | "width" | "height">;
 
-export function Icon({ icon, size = "md", className }: IconProps) {
-  const IconComponent = ICON_MAP[icon];
-  const sizeClass = {
-    sm: "w-icon-sm h-icon-sm",
-    md: "w-icon-md h-icon-md",
-    lg: "w-icon-lg h-icon-lg",
-  };
+export function Icon({ icon, size = "md", className, ...rest }: IconProps) {
+  // Acepta string (nombre) o componente Lucide directo
+  const Comp: LucideIcon = 
+    typeof icon === "string" 
+      ? ICON_MAP[icon as IconName] 
+      : (icon as unknown as LucideIcon);
 
-  if (!IconComponent) return null;
+  if (!Comp) return null;
+
+  const sizeClass =
+    size === "sm" ? "w-icon-sm h-icon-sm" :
+    size === "lg" ? "w-icon-lg h-icon-lg" :
+    "w-icon-md h-icon-md";
 
   return (
-    <IconComponent
-      className={cn("text-current", sizeClass[size], className)}
+    <Comp
+      className={cn(sizeClass, className)}
+      width="1em"
+      height="1em"
+      stroke="currentColor"
       aria-hidden="true"
+      {...rest}
     />
   );
 }
