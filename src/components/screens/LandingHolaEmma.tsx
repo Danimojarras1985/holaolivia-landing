@@ -8,6 +8,7 @@ import { CustomerStatusContainer } from '@/components/containers/LandingHolaEmma
 import { FeeContainer } from '@/components/containers/LandingHolaEmma/Fee/FeeContainer';
 import { CloseValuePropContainer } from '@/components/containers/LandingHolaEmma/CloseValueProp/CloseValuePropContainer';
 import { PreguntasFrecuentesContainer } from '@/components/containers/PreguntasFrecuentes/PreguntasFrecuentesContainer';
+import { FooterContainer } from '@/components/containers/LandingHolaEmma/Footer/FooterContainer';
 
 export default function LandingHolaEmmaScreen() {
   return (
@@ -19,6 +20,7 @@ export default function LandingHolaEmmaScreen() {
       <FeeContainer />
       <CloseValuePropContainer />
       <PreguntasFrecuentesContainer />
+      <FooterContainer />
     </LandingMainContainer>
   );
 }
